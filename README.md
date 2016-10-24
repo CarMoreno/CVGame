@@ -1,2 +1,2 @@
-## Pecera.js :fish:
+## Pycera :fish:
 Artificial Life final project
