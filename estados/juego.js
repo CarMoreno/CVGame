@@ -145,7 +145,6 @@ var Juego = {
 	},
 
 	resetear: function() {
-		alert("Nos vemos ahora!")
 		PUNTOS = 0
 		me.audioMoneda.stop()
 		me.audioTubo.stop()
@@ -176,14 +175,27 @@ var Juego = {
             itemsArr: [
                 {
                     type: "text",
-                    content: "Simple Text with Modal background, \n nothing fancy here...",
-                    fontFamily: "Luckiest Guy",
-                    fontSize: 38,
-                    color: "0xFEFF49",
+                    content: "También puedes descargar mi curriculum\n en formato PDF :-).",
+                    fontFamily: "Lucida Console",
+                    fontSize: 30,
+                    color: "0xFFFFFF",
                     offsetY: -50,
                     stroke: "0x000000",
                     strokeThickness: 5
-                }
+                },
+
+                {
+                    type: "image",
+                    content: "btnDownload",
+                    offsetY: 70,
+                    offsetX: -10,
+                    contentScale: 0.6,
+                    callback: function () {
+                    	modal.hideModal("modal")
+                      	window.open('http://carmoreno.github.io/curriculum.pdf')
+                    }
+	            },
+
             ]
         });
 		}
@@ -232,6 +244,88 @@ var Juego = {
 	                    offsetX: 300,
 	                    callback: function(){
 	                    	modal.hideModal("modal")
+	                    }
+	            	}
+	            ]
+	   		})
+		}
+		else if (fondo == "modalContacto") {
+			modal.createModal({
+	            type:"modal",
+	            includeBackground: true,
+	            modalCloseOnInput: true,
+	  			itemsArr: [
+	                {
+	                    type: "image",
+	                    content: fondo,
+	                    offsetY: 10,
+	                    offsetX: 10,
+	                    contentScale: 1
+	            	},
+	            	{
+	                    type: "image",
+	                    content: "botonIN",
+	                    offsetY: 30,
+	                    offsetX: -202,
+	                    contentScale: 0.8,
+	                    callback: function () {
+	                    	window.open("https://co.linkedin.com/in/carmoreno1")
+	                    	
+	                    }
+	            	},
+	            	{
+	                    type: "image",
+	                    content: "botonGit",
+	                    offsetY: 30,
+	                    offsetX: 102,
+	                    contentScale: 0.8,
+	                    callback: function () {
+	                    	window.open("http://github.com/carmoreno")
+	                    	
+	                    }
+	            	},
+	            	{
+	                    type: "image",
+	                    content: "botonST",
+	                    offsetY: 30,
+	                    offsetX: -102,
+	                    contentScale: 0.8,
+	                    callback: function () {
+	                    	window.open("http://stackoverflow.com/users/4508767/carmoreno")
+	                    	
+	                    }
+	            	},
+	            	{
+	                    type: "image",
+	                    content: "botonGP",
+	                    offsetY: 30,
+	                    offsetX: 202,
+	                    contentScale: 0.8,
+	                    callback: function () {
+	                    	window.open("https://plus.google.com/+CarlosMorenoV")
+	                    	
+	                    }
+	            	},
+	            	{
+	                    type: "image",
+	                    content: "botonCP",
+	                    offsetY: 30,
+	                    offsetX: 0,
+	                    contentScale: 0.8,
+	                    callback: function () {
+	                    	window.open("http://codepen.io/carmoreno")
+	                    	
+	                    }
+	            	},
+	            	{
+	                    type : "text",
+	                    content: "X",
+	                    fontSize: 45,
+	                    color: "0x000000",
+	                    offsetY: -220,
+	                    offsetX: 300,
+	                    callback: function(){
+	                    	modal.hideModal("modal");
 	                    }
 	            	}
 	            ]
