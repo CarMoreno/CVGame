@@ -331,6 +331,44 @@ var Juego = {
 	            ]
 	   		})
 		}
+		else if(fondo == "modalProyectos") {
+			modal.createModal({
+	            type:"modal",
+	            includeBackground: true,
+	            modalCloseOnInput: true,
+	  			itemsArr: [
+	                {
+	                    type: "image",
+	                    content: fondo,
+	                    offsetY: -10,
+	                    offsetX: 10,
+	                    contentScale: 1
+	            	},
+
+	            	{
+	                    type: "image",
+	                    content: "btnProyectos",
+	                    offsetY: 70,
+	                    offsetX: 0,
+	                    contentScale: 0.5,
+	                    callback: function () {
+	                    	window.open("http://carmoreno.github.io/proyectos")	
+	                    }
+		            },
+	            	{
+	                    type : "text",
+	                    content: "X",
+	                    fontSize: 45,
+	                    color: "0x000000",
+	                    offsetY: -220,
+	                    offsetX: 300,
+	                    callback: function(){
+	                    	modal.hideModal("modal")
+	                    }
+	            	}
+	            ]
+	   		})
+		}
 		else {
 			modal.createModal({
 	            type:"modal",

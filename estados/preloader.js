@@ -31,6 +31,7 @@ var Preloader = {
 		juego.load.image('botonCP', 'imgs/botonCP.png')
 		juego.load.image('botonST', 'imgs/botonST.png')
 		juego.load.image('btnDownload', 'imgs/botonDescargar.png')
+		juego.load.image('btnProyectos', 'imgs/btnProyectos.png')
 		juego.load.spritesheet('boxPregunta', 'imgs/secreto.png', 20, 18)
 		juego.load.spritesheet('botones', 'imgs/btns.png', 100, 67.8)
 		juego.load.spritesheet('btnBandera', 'imgs/btnBandera.png', 100.5, 68)
