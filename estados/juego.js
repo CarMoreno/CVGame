@@ -18,11 +18,11 @@ var Juego = {
 	    me.textoMostrar = me.add.text(10, 10, me.texto, me.style)
 	    /*------Botones----*/
 	    me.botones = []
-	    me.botonMeta = me.add.button(juego.width - 65, 200, 'btnBandera', me.configBtnBandera, me, 1, 0)
+	    me.botonMeta = me.add.button(juego.width - 65, 320, 'btnBandera', me.configBtnBandera, me, 1, 0)
 	    me.botonMeta.visible = false
 	    me.botonMeta.scale.setTo(0.6, 0.7)
 	    for (var i = 0; i < 4; i++) {
-	    	me.botones.push(me.add.button(juego.width - 65, i*50, 'botones', me.configBotones, me, i*2+1, i*2).scale.setTo(0.6, 0.7))
+	    	me.botones.push(me.add.button(juego.width - 65, i*80, 'botones', me.configBotones, me, i*2+1, i*2).scale.setTo(0.6, 0.7))
 	    	//console.log("X= "+juego.width - 65+"Y= "+i*50)
 	    }
 	    /*-----BoxPregunta----*/
