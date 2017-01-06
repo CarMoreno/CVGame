@@ -18,18 +18,17 @@ var Juego = {
 	    me.textoMostrar = me.add.text(10, 10, me.texto, me.style)
 	    /*------Botones----*/
 	    me.botones = []
-	    me.botonMeta = me.add.button(juego.width - 65, 320, 'btnBandera', me.configBtnBandera, me, 1, 0)
+	    me.botonMeta = me.add.button(juego.width - 65, 320, 'btnBandera', me.configBtnBandera, me, 1, 0)//los ultimos numeros son el frame del spritesheet que será usado cuando haya hover, o no.
 	    me.botonMeta.visible = false
 	    me.botonMeta.scale.setTo(0.6, 0.7)
 	    for (var i = 0; i < 4; i++) {
 	    	me.botones.push(me.add.button(juego.width - 65, i*80, 'botones', me.configBotones, me, i*2+1, i*2).scale.setTo(0.6, 0.7))
-	    	//console.log("X= "+juego.width - 65+"Y= "+i*50)
 	    }
 	    /*-----BoxPregunta----*/
 	    me.boxPregunta = me.add.sprite(juego.width / 2 + 15, juego.height/2 + 4, 'boxPregunta')
 	    me.boxPregunta.inputEnabled = true
 	    me.boxPregunta.input.useHandCursor = true
-	    me.boxPregunta.scale.setTo(1.6, 1.6)//escalamos el personaje
+	    me.boxPregunta.scale.setTo(1.6, 1.6)
 	    me.boxPregunta.animations.add('box', [0, 1, 2, 3], 2, true)
 	    me.boxPregunta.events.onInputDown.add(me.mostrarBox, me)
 
@@ -55,7 +54,7 @@ var Juego = {
 
 		/* -------Piso------*/
 		me.piso = me.add.tileSprite(0, juego.height - 100, 774, 15, 'piso')
-		me.piso2 = me.add.tileSprite(0, juego.height - 1, 774, 15, 'piso')
+		me.piso2 = me.add.tileSprite(0, juego.height - 1, 774, 15, 'piso')// este sprite ayuda a que el player se detenga cuando camina haca abajo.
 		me.physics.arcade.enable(me.piso) // activamos la fisica en el piso
 		me.physics.arcade.enable(me.piso2) // activamos la fisica en el piso2
 		me.piso.body.immovable = true //el piso se queda fijo, de lo contrario al colisionar con el personaje se cae
@@ -77,7 +76,13 @@ var Juego = {
 		me.player.body.velocity.x = 0
 	},
 
-	// Configura todos los avisos (tubos) del juego: fisica, cursor y eventos de click.
+	/**
+	 * [configTubo Configura las propiedades de todos los tubos (avisos), presentes en el juego.
+	 * Además, asocia eventos de click a cada tubo dependiendo de su key. La propiedad key de cada tubo
+	 * será usada como un identificador unico, esto servirá para futuras funciones.]
+	 * @param  {[type]} tubos [Array que contiene todos los avisos del juego]
+	 * @return {[type]}       [void]
+	 */
 	configTubo: function(tubos) {
 		me = this
 		for (var i in tubos) {
@@ -96,27 +101,55 @@ var Juego = {
 		}	
 	},
 
-	// Mueve el personaje a la izquierda
+	/**
+	 * [moverIzquierda Mueve el personaje a la izquierda, para esto se establece la velocidad en
+	 * el eje x negativa, posteriormente se activa la animacion 'izquierda']
+	 * @return {[type]} [void]
+	 */
 	moverIzquierda: function() {
 		me = this
 		me.player.body.velocity.x = -150
 		me.player.animations.play('izquierda')
 	},
 
-	// Mueve el personaje a la derecha
+	/**
+	 * [moverDerecha Mueve el personaje a la derecha, para esto se establece la velocidad en
+	 * el eje x positiva, posteriormente se activa la animacion 'derecha']
+	 * @return {[type]} [void]
+	 */
 	moverDerecha: function() {		
 		me = this
 		me.player.body.velocity.x = 150
 		me.player.animations.play('derecha')
 	},
 
-	// Mueve el personaje hacia abajo
+	/**
+	 * [moverAbajo Mueve el personaje hacia abajo, para esto se incrementa la posicion en Y,
+	 * posteriormente se activa la animacion 'abajo']
+	 * @return {[type]} [void]
+	 */
 	moverAbajo: function() {
 		me = this
 		me.player.position.y += 6
 		me.player.animations.play('abajo')
 	},
 
+	/**
+	 * [moverPersonaje Funcion que mueve el personaje en el juego. Para cada tubo (aviso) presente
+	 * en el juego, se debe detectar si hay colision con el personaje. Si hay una colision entonces
+	 * se ejecutarán una serie de acciones comunes para todos los tubos:
+	 * - La aimación del player se detendrá
+	 * - se reproduce el audio de colision.
+	 * - se destruye el tubo con el que se colisionó
+	 * - se muestra un modal con un mensaje
+	 * - Y el personaje queda establecido con el frame 130 (queda de frente)
+	 *
+	 * Además, hay acciones que se ejecutan dependiendo del tipo de tubo con el que se colisione
+	 * - Si se colisiona con el tubo 3, entonces el personaje se va a mover hacia abajo.
+	 * - Si se colisiona con el tubo de meta, entonces se hará visible un botón en la parte derecha. 
+	 * ]
+	 * @return {[type]} [void]
+	 */
 	moverPersonaje: function () {
 		me = this
 		for (var i in me.tubos) {
@@ -128,7 +161,6 @@ var Juego = {
 				me.player.frame = 130
 				if(me.tubos[i].key == "tubo3") {
 					me.moverAbajo()
-					//me.moverDerecha("abajo")
 				}
 				if(me.tubos[i].key == "tuboMeta"){
 					me.botonMeta.visible = true
@@ -137,6 +169,10 @@ var Juego = {
 		}
 	},
 
+	/**
+	 * [gameOver Esta función ejecuta una animaciónsobre el personaje cuando se ha llegado a los 90 puntos]
+	 * @return {[type]} [void]
+	 */
 	gameOver: function() {
 		me = this
 		if(PUNTOS == 90) {
@@ -144,6 +180,11 @@ var Juego = {
 		}
 	},
 
+	/**
+	 * [resetear Esta función establece las acciones que se siguen para comenzar un nuevo juego,
+	 * esta función se ejecuta solo cuando el usuario desea jugar de nuevo.]
+	 * @return {[type]} [void]
+	 */
 	resetear: function() {
 		PUNTOS = 0
 		me.audioMoneda.stop()
@@ -152,6 +193,14 @@ var Juego = {
 		me.game.state.start("Menu")
 	},
 
+	/**
+	 * [ganarPuntos Se encarga de asignar cinco puntos cada vez que el player colisiona con una moneda.
+	 * Para esto, se recorre el grupo de monedas y para cada moneda se valida si hay una sobreposicion
+	 * (overlap), entre la moneda en cuestion y el player. Si esto es así, esa moneda será destruida, 
+	 * se repoduce el audio de moneda, los puntos se actualizan en 5 unidades más y el texto en pantalla
+	 * (que notifica la cantidad de puntos) se actualiza.]
+	 * @return {[type]} [void]
+	 */
 	ganarPuntos: function () {
 		me = this
 		me.monedas.forEach(function(moneda){
@@ -165,6 +214,13 @@ var Juego = {
 		
 	},
 
+	/**
+	 * [crearModal Se encarga de crear todos los mensajes que se muestran en el juego, dependiendo
+	 * de un fondo. Este fondo es una imagen con un mensaje. Esta función usa el pluguin phaser_modals.
+	 * Puedes ver como funciona en: https://github.com/netgfx/phaser_modals]
+	 * @param  {[type]} fondo [String que refernecia al fondo]
+	 * @return {[type]}       [description]
+	 */
 	crearModal: function(fondo) {
 		me = this
 		if (fondo == "box") {
@@ -399,7 +455,12 @@ var Juego = {
    		modal.showModal("modal")
 	},
 
-	// Configura un mensaje de acuerdo al tubo.
+	/**
+	 * [configModal Esta función configura el fondo que será enviado a la función anterior. Segun el tubo
+	 * (aviso), será mostrado un mensaje en particular. Se usa la propieda key del tubo para asociar el mensaje.]
+	 * @param  {[type]} keyTubo [String, es el identificador que posee cada tubo]
+	 * @return {[type]}         [description]
+	 */
 	configModal: function(keyTubo) {
 		me = this
 		if(keyTubo == "tubo1") {
@@ -419,9 +480,22 @@ var Juego = {
 		}
 	},
 
+	/**
+	 * [configBotones Esta función se encarga de asociar un mensaje a cada botoón que se muestra en 
+	 * la parte derecha. Se consideró necesario crear estos botones porque cuando el personaje colisiona
+	 * con un tubo, este desaparece. Lo anterior supone que el mensaje asociado al tubo no volverá a 
+	 * aparecer. Para esto se hicieron los botones, para que los mensajes estén disponibles siempre
+	 * que el usuario los necesite.
+	 *
+	 * Esta función se ejecuta cada vez que un botón es clickeado. Se usa la propieda 'z' para identificar
+	 * el botón en cuestión y de acuerdo al botón se asocia el mensaje.
+	 * ]
+	 * @param  {[type]} boton [boton que es clickeado]
+	 * @return {[type]}       [description]
+	 */
 	configBotones: function(boton) {
-		me.audioTubo.play()
 		me = this
+		me.audioTubo.play()
 		// alert(boton.z)
 		switch(boton.z) {
 			case 3:
@@ -439,14 +513,27 @@ var Juego = {
 		}
 	},
 
+	/**
+	 * [configBtnBandera esta función se ejecuta cuando el usuario da click en el botón de bandera.
+	 * El botón bandera tiene un comportamiento distinto a los otros botones, pues inicialmente
+	 * su propiedad visible es false. Luego, cuando el player colsiona con el tubo meta, entonces
+	 * este boton es visible (se establece a true)]
+	 * @return {[type]} [void]
+	 */
 	configBtnBandera: function() {
 		me.audioTubo.play()
 		me.configModal("tuboMeta")
 	},
 
+	/**
+	 * [mostrarBox Esta función muestra un mensaje suando se da click sobre el box con signo de pregunta.]
+	 * @return {[type]} [description]
+	 */
 	mostrarBox: function() {
 		me.crearModal("box")
 	},
+
+
 	update: function() {
 		me.boxPregunta.animations.play('box')
 		me = this
@@ -454,6 +541,8 @@ var Juego = {
 		me.ganarPuntos()
 		me.gameOver()
 		me.physics.arcade.collide(me.player, me.piso)
+
+		// Esta condición ayuda que el personaje se detenga cuando camina hacia abajo.
 		if(me.physics.arcade.collide(me.player, me.piso2)) {
 			me.player.animations.stop()
 			me.piso2.destroy()

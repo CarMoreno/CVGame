@@ -7,6 +7,7 @@ var Menu = {
 		boton.scale.setTo(0.6, 0.5)	
 	},
 
+	/** [iniciarJuego Empieza el estado de Juego, se ejecuta cuando hay evento de click sobre el boton Play] */
 	iniciarJuego: function() {
 		juego.state.start('Juego')
 	}

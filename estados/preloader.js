@@ -7,7 +7,7 @@ var Preloader = {
 		me.preloadBg.anchor.setTo(0.5, 0.5)
 		me.preloadBar = me.add.sprite(juego.width / 2, juego.height/ 2, 'preloaderBar')
 		me.preloadBar.anchor.setTo(0.5, 0.5)
-		me.load.setPreloadSprite(me.preloadBar)
+		me.load.setPreloadSprite(me.preloadBar)//Ayuda a que se vea la barra de progresa en tiempo real
 
 		// Cargamos todos los recursos que usará el juego
 		juego.load.image('fondo', 'imgs/bg.png')
@@ -36,7 +36,6 @@ var Preloader = {
 		juego.load.spritesheet('botones', 'imgs/btns.png', 100, 67.8)
 		juego.load.spritesheet('btnBandera', 'imgs/btnBandera.png', 100.5, 68)
 		juego.load.spritesheet('btnPlay', 'imgs/btnPlay.png', 192, 128)
-		// juego.load.spritesheet('btnSN', 'imgs/btnSiNo.png', 192.5, 128.5)
 		juego.load.spritesheet('moneda', 'imgs/moneda.png', 32, 32)
 		juego.load.spritesheet('player', 'imgs/player.png', 64, 64)
 		juego.load.audio('audioMoneda', 'audios/moneda.wav')
