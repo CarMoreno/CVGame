@@ -3,3 +3,15 @@ html, body {
 	padding: 0 ;
 	background-color: #dedede;
 }
+canvas {
+	width: 100%;
+	height: auto;
+}
+a{
+	text-decoration: underline;
+	color: #0c2aa0 !important;
+}
+a:hover {
+	color: #1737b7 !important;
+	font-weight: bold !important;
+}

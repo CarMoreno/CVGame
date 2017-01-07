@@ -3,8 +3,9 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Carmoreno's CV game</title>
-	<link rel="stylesheet" href="css/estilos.css">
 	<link rel="shortcut icon" href="imgs/icon.png" type="image/x-icon">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+	<link rel="stylesheet" href="css/estilos.css">
 	<script src="phaser.min.js"></script>
 	<script src="modal-phaser.js"></script> <!-- by https://github.com/netgfx/phaser_modals -->
 	
@@ -17,6 +18,23 @@
 	<script src="estados/main.js"></script>
 </head>
 <body>
-	<blockquote>Visita mi blog: <a target="_blank" href="http://carmoreno.github.io">http://carmoreno.github.io</a></blockquote>
+	<div class="row">
+		<div class="col s12 m8 l8">
+			<div id="div_juego"></div>
+		</div>
+		<div class="col s12 m3 l4">
+			<div class="card">
+	            <div class="card-image">
+	              <img src="https://pbs.twimg.com/profile_images/790957808514629632/JlUEau4f_400x400.jpg">
+	              <span class="card-title"><a href="http://www.twitter.com/SoyCarmoreno" target="_blank">Carlos Moreno</a></span>
+	            </div>
+	            <div class="card-content">
+	              <p>Hola, me llamo Carlos Moreno y este es mi curriculum interactivo, un <strong>juego html5</strong> con estilo pixel donde puedes conocer un poco acerca de lo que hago. El juego tiene un pequeño secreto, ¿serás capáz de encontrarlo?. </p>
+	              <p>Si quieres conocer un poco más, visita mi blog :-)
+	              <a href="http://carmoreno.github.io" target="_blank">Carmoreno</a></p> 
+	            </div>
+	        </div>    
+		</div>
+	</div>	
 </body>
 </html>
