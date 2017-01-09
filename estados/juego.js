@@ -103,13 +103,19 @@ var Juego = {
 
 	/**
 	 * [moverIzquierda Mueve el personaje a la izquierda, para esto se establece la velocidad en
-	 * el eje x negativa, posteriormente se activa la animacion 'izquierda']
+	 * el eje x negativa, posteriormente se activa la animacion 'izquierda'. La animación a la izquerda
+	 * solo se puede realizar cuando los primeros 3 tubos no están vivos]
 	 * @return {[type]} [void]
 	 */
 	moverIzquierda: function() {
-		me = this
-		me.player.body.velocity.x = -150
-		me.player.animations.play('izquierda')
+		if(!me.tubo.alive && !me.tubo2.alive && !me.tubo3.alive) {
+			me = this
+			me.player.body.velocity.x = -150
+			me.player.animations.play('izquierda')
+		}
+		else {
+			alert("Antes debes leer todos los demás avisos :-)")
+		}
 	},
 
 	/**
@@ -162,7 +168,7 @@ var Juego = {
 				if(me.tubos[i].key == "tubo3") {
 					me.moverAbajo()
 				}
-				if(me.tubos[i].key == "tuboMeta"){
+				else if(me.tubos[i].key == "tuboMeta"){
 					me.botonMeta.visible = true
 				}
 			}
