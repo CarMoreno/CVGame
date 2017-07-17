@@ -13,24 +13,24 @@ var Juego = {
 		me.audioBg = me.add.audio('audioBg')
 		me.audioBg.loopFull(0.8) // el sonido se reproduce con loop, es decir, cuando se acaba el tema vuelve a iniciar, con un volumen establecido en 0.8
 		/*------Texto------*/
-	    me.texto = "Puntos: "+PUNTOS
-	    me.style = {font: "40px Lucida Console", fill: "#fff", }
-	    me.textoMostrar = me.add.text(10, 10, me.texto, me.style)
+	    	me.texto = "Puntos: "+PUNTOS
+	    	me.style = {font: "40px Lucida Console", fill: "#fff", }
+	    	me.textoMostrar = me.add.text(10, 10, me.texto, me.style)
 	    /*------Botones----*/
-	    me.botones = []
-	    me.botonMeta = me.add.button(juego.width - 65, 320, 'btnBandera', me.configBtnBandera, me, 1, 0)//los ultimos numeros son el frame del spritesheet que será usado cuando haya hover, o no.
-	    me.botonMeta.visible = false
-	    me.botonMeta.scale.setTo(0.6, 0.7)
-	    for (var i = 0; i < 4; i++) {
-	    	me.botones.push(me.add.button(juego.width - 65, i*80, 'botones', me.configBotones, me, i*2+1, i*2).scale.setTo(0.6, 0.7))
-	    }
-	    /*-----BoxPregunta----*/
-	    me.boxPregunta = me.add.sprite(juego.width / 2 + 15, juego.height/2 + 4, 'boxPregunta')
-	    me.boxPregunta.inputEnabled = true
-	    me.boxPregunta.input.useHandCursor = true
-	    me.boxPregunta.scale.setTo(1.6, 1.6)
-	    me.boxPregunta.animations.add('box', [0, 1, 2, 3], 2, true)
-	    me.boxPregunta.events.onInputDown.add(me.mostrarBox, me)
+	    	me.botones = []
+	    	me.botonMeta = me.add.button(juego.width - 65, 320, 'btnBandera', me.configBtnBandera, me, 1, 0)//los ultimos numeros son el frame del spritesheet que será usado cuando haya hover, o no.
+	    	me.botonMeta.visible = false
+	    	me.botonMeta.scale.setTo(0.6, 0.7)
+	    	for (var i = 0; i < 4; i++) {
+	    		me.botones.push(me.add.button(juego.width - 65, i*80, 'botones', me.configBotones, me, i*2+1, i*2).scale.setTo(0.6, 0.7))
+	    	}
+	    	/*-----BoxPregunta----*/
+	    	me.boxPregunta = me.add.sprite(juego.width / 2 + 15, juego.height/2 + 4, 'boxPregunta')
+	    	me.boxPregunta.inputEnabled = true
+	    	me.boxPregunta.input.useHandCursor = true
+	    	me.boxPregunta.scale.setTo(1.6, 1.6)
+	    	me.boxPregunta.animations.add('box', [0, 1, 2, 3], 2, true)
+	    	me.boxPregunta.events.onInputDown.add(me.mostrarBox, me)
 
 		/*------Tubos------*/
 		me.tubo = me.add.sprite(juego.width - 600 , juego.height - 170, 'tubo1')
