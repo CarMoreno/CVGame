@@ -527,6 +527,7 @@ var Juego = {
 	 * @return {[type]} [void]
 	 */
 	configBtnBandera: function() {
+		me = this
 		me.audioTubo.play()
 		me.configModal("tuboMeta")
 	},
@@ -536,13 +537,14 @@ var Juego = {
 	 * @return {[type]} [description]
 	 */
 	mostrarBox: function() {
+		me = this
 		me.crearModal("box")
 	},
 
-
+	
 	update: function() {
-		me.boxPregunta.animations.play('box')
 		me = this
+		me.boxPregunta.animations.play('box')
 		me.moverPersonaje()
 		me.ganarPuntos()
 		me.gameOver()
